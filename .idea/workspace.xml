@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7ecec851-8b31-412c-a0b0-c4257b30ab24" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/final.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/model-definition/restult-mix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results/model-definition/restult-mix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/model-definition/result-final.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results/model-definition/result-final.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/model-definition/result-gt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results/model-definition/result-gt.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/keras_first_network_pca_btc_kfold_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/keras_first_network_pca_btc_kfold_test.py" afterDir="false" />
-    </list>
+    <list default="true" id="7ecec851-8b31-412c-a0b0-c4257b30ab24" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +35,8 @@
       <file leaf-file-name="final.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/results/final.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="120">
+              <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -174,16 +167,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1366" height="745" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14494875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14494875" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32786885" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32786885" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -353,8 +345,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/results/final.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="120">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
         </state>
       </provider>
     </entry>

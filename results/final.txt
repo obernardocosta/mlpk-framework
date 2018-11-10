@@ -25,4 +25,8 @@ FINAL-MIX
 
     pca_n = int(sys.argv[2])
     neuron_number = int(sys.argv[3])
-    data_n = int(sys.argv[4])
+    data_n = int(sys.argv[4
+
+ 50,70
+ 49,30
+ 53,99

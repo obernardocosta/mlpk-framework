@@ -4,3 +4,4 @@ workspace.xml
 .vscode
 v-env
 __pycache__
+algorithms/.output/nn/*.png

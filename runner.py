@@ -1,3 +1,5 @@
+import shutil
+
 import numpy as np
 import pandas as pd
 
@@ -9,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedKFold
 
-from algorithms import nn
+from algorithms.nn import NN
 
 
 def load_data(path='', names=None):
@@ -42,8 +44,9 @@ def pca_transformation(X, n_components):
 def main():
 
     print('Runner init', get_now())
+    #shutil.rmtree('./algorithms/.output')
     df = load_data(path='./data/final-mix/data-1.csv', names=['btc', 'gt', 'y'])
-    df = add_data(df, start_date="2013/08/19")
+    #df = add_data(df, start_date="2013/08/19")
     skfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=None)
 
     Train, Test = train_test_split(df, test_size=0.2)
@@ -62,23 +65,25 @@ def main():
         scaler = StandardScaler().fit(X_train[['btc', 'gt']])
         X_train[['btc', 'gt']] = scaler.transform(X_train[['btc', 'gt']])
 
-        n = 5
+        n = 2
         X_train = pca_transformation(X_train, n_components=n)
         X_evaluate = pca_transformation(X_evaluate, n_components=n)
 
         # Alg part
-        model = nn.NN(n_layers=3,
-                      input_dim=5,
+        model = NN(n_layers=3,
+                      input_dim=2,
                       n_neurons=[5, 8, 1],
                       list_act_func=['tanh', 'tanh', 'sigmoid'],
-                      model_name='nn',
+                      name='nn',
                       loss='binary_crossentropy',
                       optimizer='sgd',
                       metrics=['accuracy'])
 
 
-        model.train(X_train, y_train, epochs=100)
-        model.evaluate(X_evaluate, y_evaluate)
+        history = model.train(X_train, y_train, epochs=100)
+        scores = model.evaluate(X_evaluate, y_evaluate)
+        print("rms %.4f%% %s: %.4f%%" %
+              (scores[0] * 100, model.model.metrics_names[1], scores[1] * 100))
        # alg end
 
 

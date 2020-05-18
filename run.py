@@ -3,13 +3,16 @@ from Runner import Runner as R
 
 def main():
 
-    epochs = 1
     n_split = 10
     n_components = 2
     test_size = 0.2
     start_date = '2013/08/19'
     data_path = './data/final-mix/data-1.csv'
     columns = ['btc', 'gt', 'y']
+
+    '''For Neural Nets'''
+    '''
+    epochs = 1
     algo_conf = {
         'algorithms_name': 'NN',
         'n_layers': 3,
@@ -20,6 +23,8 @@ def main():
         'optimizer': 'sgd',
         'metric': 'accuracy'
     }
+    ''''
+
 
     r = R(algo_conf, epochs, n_split, n_components, test_size, start_date, data_path, columns)
     

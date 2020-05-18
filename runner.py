@@ -17,7 +17,7 @@ from algorithms.nn import NN
 class Runner:
     """Base Class for Machine Learning methods."""
 
-    def __init__(self, algo_conf, epochs, n_split, n_components, test_size, start_date, data_path, columns):
+    def __init__(self, algo_conf, n_split, n_components, test_size, start_date, data_path, columns, epochs=0):
 
         self._ALGORITHMS_OUTPUT_PATH = './algorithms/.output'
         

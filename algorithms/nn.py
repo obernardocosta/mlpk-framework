@@ -26,22 +26,22 @@ class NN(Model):
     
 
     def create_model(self):
-            self.model = keras.models.Sequential(name=self.name)
+        self.model = keras.models.Sequential(name=self.name)
 
-            for layer, act_f, n in zip(range(1, self.n_layers+1), self.list_act_func, self.n_neurons):
-                if layer == 1:
-                    self.model.add(layers.Dense(
-                        n, input_dim=self.input_dim, activation=act_f, name="layer{}".format(layer)))
-                else:
-                    self.model.add(layers.Dense(
-                        n, activation=act_f, name="layer{}".format(layer)))
-            
-            self.create_history_folder(self.path, self.name)
+        for layer, act_f, n in zip(range(1, self.n_layers+1), self.list_act_func, self.n_neurons):
+            if layer == 1:
+                self.model.add(layers.Dense(
+                    n, input_dim=self.input_dim, activation=act_f, name="layer{}".format(layer)))
+            else:
+                self.model.add(layers.Dense(
+                    n, activation=act_f, name="layer{}".format(layer)))
+        
+        self.create_history_folder(self.path, self.name)
 
-            self.model.compile(
-                loss=self.loss,
-                optimizer=self.optimizer,
-                metrics=self.metrics)
+        self.model.compile(
+            loss=self.loss,
+            optimizer=self.optimizer,
+            metrics=self.metrics)
 
 
     def train(self, X_train, y_train, epochs):

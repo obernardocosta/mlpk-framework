@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 
 class NN(Model):
-    def __init__(self, n_layers=1, input_dim=1, n_neurons=[], list_act_func=[], loss='', optimizer='', metrics=[], path='algorithms/.output', name='nn'):
+    def __init__(self, n_layers=1, input_dim=1, n_neurons=[], list_act_func=[], loss='', optimizer='', metric=[], path='algorithms/.output', name='nn'):
         
         self.n_layers = n_layers
         self.input_dim = input_dim
@@ -16,7 +16,7 @@ class NN(Model):
         self.list_act_func = list_act_func
         self.loss = loss
         self.optimizer = optimizer
-        self.metrics = metrics
+        self.metric = metric
         self.path = path
         self.name = name
 
@@ -41,7 +41,7 @@ class NN(Model):
         self.model.compile(
             loss=self.loss,
             optimizer=self.optimizer,
-            metrics=self.metrics)
+            metrics=[self.metric])
 
 
     def train(self, X_train, y_train, epochs):
@@ -62,7 +62,8 @@ class NN(Model):
 
 
     def evaluate(self, X_test, y_test):
-        return self.model.evaluate(X_test, y_test)
+        self.scores = self.model.evaluate(X_test, y_test)
+        return self.scores
     
 
     def predict(self, X_new):

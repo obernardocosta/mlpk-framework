@@ -15,24 +15,37 @@ def main():
     '''For Neural Nets'''
     '''
     algo_conf = {
-        'algorithms_name': 'NN',
+        'name': 'NN',
         'n_layers': 3,
         'input_dim': 2,
         'n_neurons': [5, 8, 1],
         'list_act_func': ['tanh', 'tanh', 'sigmoid'],
-        'loss': 'binary_crossentropy',
+        'loss': 'mean_squared_error',
         'optimizer': 'sgd',
         'metric': 'accuracy'
     }
     '''
 
-    '''For Naive Bayes Binary CLs'''
+    '''For Naive Bayes Binary Cls'''
+    '''
     algo_conf = {
-        'algorithms_name': 'naive_bayes_bcls',
+        'name': 'naive_bayes_bcls',
         'priors': None,
         'var_smoothing': 0.1,
         'metric': 'accuracy'
     }
+    '''
+
+    '''For Logistic Regression Binary Cls'''
+    
+    algo_conf = {
+        'name': 'logistic_regression_bcls',
+        'solver': 'liblinear',
+        'metric': 'accuracy'
+    }
+    
+    
+
     
 
     r = R(algo_conf=algo_conf, epochs=epochs, n_split=n_split, n_components=n_components,

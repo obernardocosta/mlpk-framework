@@ -13,6 +13,7 @@ from sklearn.model_selection import StratifiedKFold
 
 from algorithms.nn import NN
 from algorithms.naive_bayes_bcls import NaiveBayesBCls
+from algorithms.logistic_regression import LogisticRegressionBCls
 
 
 class Runner:
@@ -30,13 +31,12 @@ class Runner:
         self.start_date = start_date
         self.data_path = data_path
         self.columns = columns
+        self.metric = self.algo_conf['metric']
+        self.algo_conf.pop('metric', None)
+
         
         self.feature_columns = [x for x in self.columns if x != 'y']
         self.pre_models = []
-
-        if self.algo_conf['algorithms_name'] == 'NN':
-            pass
-        
 
     
     def run(self):
@@ -61,11 +61,11 @@ class Runner:
         max_ = max(seq)
 
         print('---------------------------')
-        print('best model {}: {}'.format(self.algo_conf['metric'], max_))
+        print('best model {}: {}'.format(self.metric, max_))
         print('---------------------------')
 
         _model = [
-            model for model in self.pre_models if model[self.algo_conf['metric']] == max_][0]
+            model for model in self.pre_models if model[self.metric] == max_][0]
         model = _model['model']
 
         X_train = self.Train[self.feature_columns]
@@ -86,11 +86,11 @@ class Runner:
         scores = model.evaluate(X_test, y_test)
 
         print("rms %.4f%% %s: %.4f%%" %
-            (scores[0] * 100, model.metrics[0], scores[1] * 100))
+            (scores[0] * 100, self.metric, scores[1] * 100))
 
         self.result_metric = {
             'rms': scores[0] * 100,
-            model.metrics[0]: scores[1] * 100,
+            self.metric: scores[1] * 100,
             'means': means,
             'stds': stds,
             'model': model
@@ -129,12 +129,12 @@ class Runner:
             history = model.train(X_train, y_train, epochs=self.epochs)
             scores = model.evaluate(X_evaluate, y_evaluate)
             print("rms %.4f%% %s: %.4f%%" %
-                (scores[0] * 100, model.metrics[0], scores[1] * 100))
+                (scores[0] * 100, self.metric, scores[1] * 100))
 
             self.pre_models.append(
                 {
                     'rms': scores[0] * 100,
-                    model.metrics[0]: scores[1] * 100,
+                    self.metric: scores[1] * 100,
                     'means': means,
                     'stds': stds,
                     'model': model
@@ -144,20 +144,16 @@ class Runner:
 
     def get_model(self):
         model = None
+        name = self.algo_conf['name']
+        
+        if name == 'NN':
+            self.algo_conf['metric'] = self.metric
+            model = NN(**self.algo_conf)
+        elif name == 'naive_bayes_bcls':
+            model = NaiveBayesBCls(**self.algo_conf)
+        elif name == 'logistic_regression_bcls':
+            model = LogisticRegressionBCls(**self.algo_conf)
 
-        if self.algo_conf['algorithms_name'] == 'NN':
-            model = NN(n_layers=self.algo_conf['n_layers'],
-                    input_dim=self.algo_conf['input_dim'],
-                    n_neurons=self.algo_conf['n_neurons'],
-                    list_act_func=self.algo_conf['list_act_func'],
-                    name=self.algo_conf['algorithms_name'],
-                    loss=self.algo_conf['loss'],
-                    optimizer=self.algo_conf['optimizer'],
-                    metrics=[self.algo_conf['metric']])
-        elif self.algo_conf['algorithms_name'] == 'naive_bayes_bcls':
-            model = NaiveBayesBCls(priors=self.algo_conf['priors'],
-                    var_smoothing=self.algo_conf['var_smoothing'],
-                    metrics=[self.algo_conf['metric']])
         return model
 
 

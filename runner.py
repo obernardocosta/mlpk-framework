@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedKFold
 
 from algorithms.nn import NN
+from algorithms.naive_bayes_bcls import NaiveBayesBCls
 
 
 class Runner:
@@ -85,11 +86,11 @@ class Runner:
         scores = model.evaluate(X_test, y_test)
 
         print("rms %.4f%% %s: %.4f%%" %
-            (scores[0] * 100, model.model.metrics_names[1], scores[1] * 100))
+            (scores[0] * 100, model.metrics[0], scores[1] * 100))
 
         self.result_metric = {
             'rms': scores[0] * 100,
-            model.model.metrics_names[1]: scores[1] * 100,
+            model.metrics[0]: scores[1] * 100,
             'means': means,
             'stds': stds,
             'model': model
@@ -128,12 +129,12 @@ class Runner:
             history = model.train(X_train, y_train, epochs=self.epochs)
             scores = model.evaluate(X_evaluate, y_evaluate)
             print("rms %.4f%% %s: %.4f%%" %
-                (scores[0] * 100, model.model.metrics_names[1], scores[1] * 100))
+                (scores[0] * 100, model.metrics[0], scores[1] * 100))
 
             self.pre_models.append(
                 {
                     'rms': scores[0] * 100,
-                    model.model.metrics_names[1]: scores[1] * 100,
+                    model.metrics[0]: scores[1] * 100,
                     'means': means,
                     'stds': stds,
                     'model': model
@@ -153,12 +154,17 @@ class Runner:
                     loss=self.algo_conf['loss'],
                     optimizer=self.algo_conf['optimizer'],
                     metrics=[self.algo_conf['metric']])
+        elif self.algo_conf['algorithms_name'] == 'naive_bayes_bcls':
+            model = NaiveBayesBCls(priors=self.algo_conf['priors'],
+                    var_smoothing=self.algo_conf['var_smoothing'],
+                    metrics=[self.algo_conf['metric']])
         return model
-
 
 
     @staticmethod
     def load_data(path='', names=None):
+        print(path, names)
+        print('****')
         df = pd.read_csv(path, index_col=None, names=names,
                         sep=', ', engine='python')
         return df

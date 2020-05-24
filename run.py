@@ -54,9 +54,17 @@ def main():
     '''
 
     '''For Decision Tree Binary Cls'''
-    
+    '''
     algo_conf = {
         'name': 'decision_tree',
+        'metric': 'accuracy'
+    }
+    '''
+
+    '''For Random Forest Binary Cls'''
+    
+    algo_conf = {
+        'name': 'random_forest',
         'metric': 'accuracy'
     }
     

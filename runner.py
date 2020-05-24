@@ -13,6 +13,7 @@ from sklearn.model_selection import StratifiedKFold
 
 from algorithms.nn import NN
 from algorithms.svm import SVM
+from algorithms.decision_tree import DecisionTree
 from algorithms.naive_bayes_bcls import NaiveBayesBCls
 from algorithms.logistic_regression import LogisticRegressionBCls
 
@@ -156,6 +157,9 @@ class Runner:
             model = LogisticRegressionBCls(**self.algo_conf)
         elif name == 'svm':
             model = SVM(**self.algo_conf)
+        elif name == 'decision_tree':
+            model = DecisionTree(**self.algo_conf)
+
 
         return model
 

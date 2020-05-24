@@ -46,11 +46,20 @@ def main():
     '''
 
     '''For SVM  Binary Cls'''
-    
+    '''
     algo_conf = {
         'name': 'svm',
         'metric': 'accuracy'
     }
+    '''
+
+    '''For Decision Tree Binary Cls'''
+    
+    algo_conf = {
+        'name': 'decision_tree',
+        'metric': 'accuracy'
+    }
+    
 
     
 

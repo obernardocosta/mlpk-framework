@@ -1,6 +1,6 @@
 from algorithms.model import Model
 
-from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, mean_squared_error
 
@@ -9,7 +9,7 @@ from math import sqrt
 
 
 class RandomForest(Model):
-    def __init__(self, n_estimators=100, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None, metrics=[], path='algorithms/.output', name='random_forest'):
+    def __init__(self, n_estimators=100, *, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None, metrics=[], path='algorithms/.output', name='random_forest'):
         
         self.n_estimators = n_estimators
         self.criterion = criterion
@@ -40,7 +40,7 @@ class RandomForest(Model):
     
 
     def create_model(self):
-        self.model = RandomForestClassifier(n_estimators=self.n_estimators,
+        self.model = XGBClassifier(n_estimators=self.n_estimators,
                                             criterion=self.criterion,
                                             max_depth=self.max_depth,
                                             min_samples_split=self.min_samples_split,

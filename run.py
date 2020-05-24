@@ -37,14 +37,20 @@ def main():
     '''
 
     '''For Logistic Regression Binary Cls'''
-    
+    '''
     algo_conf = {
         'name': 'logistic_regression_bcls',
         'solver': 'liblinear',
         'metric': 'accuracy'
     }
+    '''
+
+    '''For SVM  Binary Cls'''
     
-    
+    algo_conf = {
+        'name': 'svm',
+        'metric': 'accuracy'
+    }
 
     
 

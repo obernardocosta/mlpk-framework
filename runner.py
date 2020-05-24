@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedKFold
 
 from algorithms.nn import NN
+from algorithms.svm import SVM
 from algorithms.naive_bayes_bcls import NaiveBayesBCls
 from algorithms.logistic_regression import LogisticRegressionBCls
 
@@ -153,6 +154,8 @@ class Runner:
             model = NaiveBayesBCls(**self.algo_conf)
         elif name == 'logistic_regression_bcls':
             model = LogisticRegressionBCls(**self.algo_conf)
+        elif name == 'svm':
+            model = SVM(**self.algo_conf)
 
         return model
 

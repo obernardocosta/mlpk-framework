@@ -1,6 +1,6 @@
 # MLPK Framework
 
-**M**achine **L** **P**CA **K**-Fold Framework
+**M**achine **L**earning **P**CA **K**-Fold Framework
 
 ## Tutorial
 

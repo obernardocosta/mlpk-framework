@@ -62,15 +62,30 @@ def main():
     '''
 
     '''For Random Forest Binary Cls'''
-    
+    '''
     algo_conf = {
         'name': 'random_forest',
         'metric': 'accuracy'
     }
-    
+    '''
 
-    
+    '''For XGBoot Binary Cls'''
+    '''
+    algo_conf = {
+        'objective': 'binary:logistic',
+        'name': 'xgboost',
+        'metric': 'accuracy'
+    }
+    '''
 
+    '''For LightGBM Binary Cls'''
+    
+    algo_conf = {
+        'name': 'lightgbm',
+        'metric': 'accuracy'
+    }
+    
+    
     r = R(algo_conf=algo_conf, epochs=epochs, n_split=n_split, n_components=n_components,
           test_size=test_size, start_date=start_date, data_path=data_path, columns=columns)
 

@@ -13,6 +13,8 @@ from sklearn.model_selection import StratifiedKFold
 
 from algorithms.nn import NN
 from algorithms.svm import SVM
+from algorithms.xgboost import XGBoost
+from algorithms.lightgbm import LightGBM
 from algorithms.decision_tree import DecisionTree
 from algorithms.random_forest import RandomForest
 from algorithms.naive_bayes_bcls import NaiveBayesBCls
@@ -22,7 +24,7 @@ from algorithms.logistic_regression import LogisticRegressionBCls
 class Runner:
     """Base Class for Machine Learning methods."""
 
-    def __init__(self, algo_conf, n_split, n_components, test_size, start_date, data_path, columns, epochs=0):
+    def __init__(self, algo_conf, n_split, n_components, test_size, start_date, data_path, columns, epochs=0, shuffle=True):
 
         self._ALGORITHMS_OUTPUT_PATH = './algorithms/.output'
         
@@ -36,6 +38,7 @@ class Runner:
         self.columns = columns
         self.metric = self.algo_conf['metric']
         self.algo_conf.pop('metric', None)
+        self.shuffle = shuffle
 
         
         self.feature_columns = [x for x in self.columns if x != 'y']
@@ -52,7 +55,7 @@ class Runner:
             n_splits=self.n_split, shuffle=True, random_state=None)
 
         self.Train, self.Test = train_test_split(
-            self.df, test_size=self.test_size)
+            self.df, test_size=self.test_size, shuffle=self.shuffle)
         
         self.choose_best_kf_model()
         self.run_for_the_best_model()
@@ -162,6 +165,13 @@ class Runner:
             model = DecisionTree(**self.algo_conf)
         elif name == 'random_forest':
             model = RandomForest(**self.algo_conf)
+        elif name == 'xgboost':
+            model = XGBoost(**self.algo_conf)
+        elif name == 'lightgbm':
+            model = LightGBM(**self.algo_conf)
+        elif name == 'LSTM':
+            model = LSTM(**self.algo_conf)
+
 
 
         return model

@@ -1,36 +1,44 @@
 from algorithms.model import Model
 
-from xgboost import XGBClassifier
+from xgboost import XGBModel
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, mean_squared_error
 
 import pickle
+import numpy as np
 from math import sqrt
 
 
-class RandomForest(Model):
-    def __init__(self, n_estimators=100, *, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None, metrics=[], path='algorithms/.output', name='random_forest'):
+class XGBoost(Model):
+    def __init__(self, objective="binary:logistic", max_depth=None, learning_rate=None, n_estimators=100, verbosity=None, booster=None, tree_method=None, n_jobs=None, gamma=None, min_child_weight=None, max_delta_step=None, subsample=None, colsample_bytree=None, colsample_bylevel=None, colsample_bynode=None, reg_alpha=None, reg_lambda=None, scale_pos_weight=None, base_score=None, random_state=None, missing=np.nan, num_parallel_tree=None, monotone_constraints=None, interaction_constraints=None, importance_type="gain", gpu_id=None, validate_parameters=None, metrics=[], path='algorithms/.output', name='xgboost'):
         
-        self.n_estimators = n_estimators
-        self.criterion = criterion
+        self.objective = objective
         self.max_depth = max_depth
-        self.min_samples_split = min_samples_split
-        self.min_samples_leaf = min_samples_leaf
-        self.min_weight_fraction_leaf = min_weight_fraction_leaf
-        self.max_features = max_features
-        self.max_leaf_nodes = max_leaf_nodes
-        self.min_impurity_decrease = min_impurity_decrease
-        self.min_impurity_split = min_impurity_split
-        self.bootstrap = bootstrap
-        self.oob_score = oob_score
+        self.learning_rate = learning_rate
+        self.n_estimators = n_estimators
+        self.verbosity = verbosity
+        self.booster = booster
+        self.tree_method = tree_method
         self.n_jobs = n_jobs
+        self.gamma = gamma
+        self.min_child_weight = min_child_weight
+        self.max_delta_step = max_delta_step
+        self.subsample = subsample
+        self.colsample_bytree = colsample_bytree
+        self.colsample_bylevel = colsample_bylevel
+        self.colsample_bynode = colsample_bynode
+        self.reg_alpha = reg_alpha
+        self.reg_lambda = reg_lambda
+        self.scale_pos_weight = scale_pos_weight
+        self.base_score = base_score
         self.random_state = random_state
-        self.verbose = verbose
-        self.warm_start = warm_start
-        self.class_weight = class_weight
-        self.metrics = metrics
-        self.ccp_alpha = ccp_alpha
-        self.max_samples = max_samples
+        self.missing = missing
+        self.num_parallel_tree = num_parallel_tree
+        self.monotone_constraints = monotone_constraints
+        self.interaction_constraints = interaction_constraints
+        self.importance_type = importance_type
+        self.gpu_id = gpu_id
+        self.validate_parameters = validate_parameters
         self.path = path
         self.name = name
 
@@ -40,25 +48,33 @@ class RandomForest(Model):
     
 
     def create_model(self):
-        self.model = XGBClassifier(n_estimators=self.n_estimators,
-                                            criterion=self.criterion,
-                                            max_depth=self.max_depth,
-                                            min_samples_split=self.min_samples_split,
-                                            min_samples_leaf=self.min_samples_leaf,
-                                            min_weight_fraction_leaf=self.min_weight_fraction_leaf,
-                                            max_features=self.max_features,
-                                            max_leaf_nodes=self.max_leaf_nodes,
-                                            min_impurity_decrease=self.min_impurity_decrease,
-                                            min_impurity_split=self.min_impurity_split,
-                                            bootstrap=self.bootstrap,
-                                            oob_score=self.oob_score,
-                                            n_jobs=self.n_jobs,
-                                            random_state=self.random_state,
-                                            verbose=self.verbose,
-                                            warm_start=self.warm_start,
-                                            class_weight=self.class_weight,
-                                            ccp_alpha=self.ccp_alpha,
-                                            max_samples=self.max_samples)
+        self.model = XGBClassifier(objective=self.objective,
+                              max_depth=self.max_depth,
+                              learning_rate=self.learning_rate,
+                              n_estimators=self.n_estimators,
+                              verbosity=self.verbosity,
+                              booster=self.booster,
+                              tree_method=self.tree_method,
+                              n_jobs=self.n_jobs,
+                              gamma=self.gamma,
+                              min_child_weight=self.min_child_weight,
+                              max_delta_step=self.max_delta_step,
+                              subsample=self.subsample,
+                              colsample_bytree=self.colsample_bytree,
+                              colsample_bylevel=self.colsample_bylevel,
+                              colsample_bynode=self.colsample_bynode,
+                              reg_alpha=self.reg_alpha,
+                              reg_lambda=self.reg_lambda,
+                              scale_pos_weight=self.scale_pos_weight,
+                              base_score=self.base_score,
+                              random_state=self.random_state,
+                              missing=self.missing,
+                              num_parallel_tree=self.num_parallel_tree,
+                              monotone_constraints=self.monotone_constraints,
+                              interaction_constraints=self.interaction_constraints,
+                              importance_type=self.importance_type,
+                              gpu_id=self.gpu_id,
+                              validate_parameters=self.validate_parameters)
 
 
     def train(self, X_train, y_train, epochs):

@@ -1,3 +1,4 @@
+import time
 import shutil
 
 import numpy as np
@@ -46,6 +47,10 @@ class Runner:
 
     
     def run(self):
+
+        start = time.time()
+        print('Runner init', start)
+
         shutil.rmtree(self._ALGORITHMS_OUTPUT_PATH, ignore_errors=True)
 
         self.df = Runner.load_data(path=self.data_path, names=self.columns)
@@ -59,6 +64,10 @@ class Runner:
         
         self.choose_best_kf_model()
         self.run_for_the_best_model()
+
+        end = time.time()
+        self.timer = end - start
+        print('Runner finish. Timer:', self.timer)
 
 
     def run_for_the_best_model(self):

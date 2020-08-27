@@ -1,6 +1,6 @@
 from algorithms.model import Model
 
-from xgboost import XGBModel
+from xgboost import XGBModel, XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, mean_squared_error
 

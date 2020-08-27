@@ -4,8 +4,11 @@
 
 ## Tutorial
 
-1. Set the mandatory parameters and the choosen algorithm parameters in the run.py
-2. ```python3 run.py```
+1. Create venv with ```python3 -m venv v-env```
+2. Active your environment ```source v-env/bin/active```
+3. install all dependencies ```pip3 install -r requirements.txt```
+4. Set the mandatory parameters for the choosen algorithm parameters in the run.py
+5. ```python3 run.py```
 
 ### Mandatory Parameters
 
